@@ -9,7 +9,6 @@ echo -e "$FILES"
 for FILE in $FILES; do
 	if [[ $FILE =~ $EXTENSIONS_REGEX ]] ; then
 		RESULT="true"
-		break
 	fi
 done
 echo -e "$RESULT"
