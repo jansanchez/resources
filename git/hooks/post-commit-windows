@@ -14,6 +14,7 @@ for FILE in $FILES; do
 		if [[ $FILE = ${I} ]]; then
 		#echo "extension estatica detectada - - - > ${I}"
 		RESULT="true"
+		break
 		fi
 	done
 done
