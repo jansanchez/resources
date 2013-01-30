@@ -1,3 +1,6 @@
+# ruta general: ~/.gitconfig
+# ruta general: home/{nombre-de-usuario}/.gitconfig
+
 [user]
 	name = Jan Sanchez
 	email = jan.sanchez@perucomsultores.pe

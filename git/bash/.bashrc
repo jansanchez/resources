@@ -1,5 +1,8 @@
 
-#codigo para agregar el color del repositorio git a tu terminal
+# metodo simple para agregar un indicador de color a los repositorios git en tu terminal
+# por lo general agregar al final del archivo ".bashrc"
+# ruta general: ~/.bashrc
+# ruta general: home/{nombre-de-usuario}/.bashrc
 
 export PS1='\u@\h:\w\[\033[32m\]$(__git_ps1 " (%s)")\[\033[0m\]$ '
 

@@ -1,6 +1,7 @@
 #!/bin/bash
 # author @slovacus -> Luis Alberto Mayta
 # modified by @jansanchez -> Jan Sanchez A.
+# ruta general: var/www/nombre-de-tu-proyecto-web/.git/hooks/post-commit
 #
 declare -a EXTENSION=('*.css' '*.js' '*.png' '*.jpg' '*.gif');
 ULTIMO_COMMIT=$(git rev-list --max-count=1 HEAD)
