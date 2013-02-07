@@ -1,5 +1,9 @@
+# virtualhost
+# archivo nombre-del-dominio
+
+
 <VirtualHost *:80>
-	ServerAdmin joejansanchez@gmail.com
+	ServerAdmin name@mail.com
 	ServerName mipagina.pe
 	DocumentRoot /var/www/mipagina/public
 
