@@ -1,0 +1,33 @@
+
+# lista de todos los usuarios del repositorio actual
+git log --format='%aN' | sort -u
+
+# lista de archivos modificados desde: 01 Feb 2013 por el usuario "Jan Sanchez"
+git log --name-only --pretty=format: --author="Jan Sanchez" --since="01 Feb 2013" | sort | uniq
+
+# lista de diferencias entre archivos de dos ramas distintas
+git diff --name-status master..des
+
+# Actualizar repositorio desde el origin deseado "master"
+git pull origin master
+
+# Cambiar de rama(ir hacia la rama pre)
+git checkout pre
+
+# Traer los cambios desde la rama master y sobreescribirlos en la rama actual
+git merge master
+
+# Verificar estatus del repositorio
+git status
+
+# Actualizar rama remota
+git push
+
+# Ver lista de tags
+git tag
+
+# crear un nuevo tag
+git tag -a v1.0.0-r1 -m 'pase #34567';
+
+# Subir el nuevo tag creado hacia la rama remota
+git push --tags
