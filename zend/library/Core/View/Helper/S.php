@@ -35,3 +35,9 @@ class Core_View_Helper_S extends Zend_View_Helper_Abstract
     }
 
 }
+
+/*
+ejemplo de implementacion el el layout.phtml
+
+<link href='<?php echo $this->S('styles/layout.css') ?>' type='text/css' rel='stylesheet' />
+*/
