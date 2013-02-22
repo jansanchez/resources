@@ -38,3 +38,9 @@ class App_Config
        return '?v=' . self::getVersion();
     }
 }
+
+/*
+ejemplo de implementacion el el layout.phtml
+
+<link type="text/css" rel="stylesheet" href="styles/layout.css<?php echo App_Config::getStaticVersion(); ?>" media="all">
+*/
