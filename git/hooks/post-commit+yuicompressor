@@ -24,15 +24,13 @@ for FILE in $FILES; do
 	for I in "${EXTENSION[@]}"; do
 		if [[ $FILE = ${I} ]]; then
 
-			
 			echo -e ""
 			DIRS=(${FILE//\// })
 			LAST_PART=${DIRS[${#DIRS[@]} - 1]}
 			OUTPUT=`echo $FILE | sed "s/${LAST_PART}/${min_path}${LAST_PART}/"`
 			sudo java -jar $yuicompressor_path "$FILE" -o "$OUTPUT"
 			echo "minificando from: ${FILE} to --> ${OUTPUT}"
-			echo -e ""
-			
+			echo -e ""			
 
 			if [[ $FILE = ${EXTENSION[0]} ]]; then # si el archivo es css entonces reemplazara el texto version
 				IDCOMMIT=$(set -f; git log -1 --format=%h)
