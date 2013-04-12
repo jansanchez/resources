@@ -1,0 +1,59 @@
+#!/bin/bash
+# versionador de estaticos + yuicompressor
+# author @slovacus -> Luis Alberto Mayta
+# modified by @jansanchez -> Jan Sanchez A.
+#
+declare -a EXTENSION=('*.css' '*.js' '*.png' '*.jpg' '*.gif');
+ULTIMO_COMMIT=$(git rev-list --max-count=1 HEAD)
+PENULTIMO_COMMIT=$(git rev-list --max-count=1 HEAD~1)
+FILES=$(git diff $ULTIMO_COMMIT $PENULTIMO_COMMIT --name-only)
+RESULT="false"
+COMMITFILE="last_commit"
+#echo -e ""
+#echo -e "$FILES"
+
+#variables para el minificado
+#base_folder="$(git rev-parse --show-toplevel)"
+yuicompressor_path=~/.config/sublime-text-2/Packages/yui-compressor/bin/yuicompressor-2.4.7.jar
+min_path="min\/"
+
+for FILE in $FILES; do
+	if [ "$FILE" == "$COMMITFILE" ] ; then	
+		break
+	fi
+	for I in "${EXTENSION[@]}"; do
+		if [[ $FILE = ${I} ]]; then
+
+			
+			echo -e ""
+			DIRS=(${FILE//\// })
+			LAST_PART=${DIRS[${#DIRS[@]} - 1]}
+			OUTPUT=`echo $FILE | sed "s/${LAST_PART}/${min_path}${LAST_PART}/"`
+			sudo java -jar $yuicompressor_path "$FILE" -o "$OUTPUT"
+			echo "minificando from: ${FILE} to --> ${OUTPUT}"
+			echo -e ""
+			
+
+			if [[ $FILE = ${EXTENSION[0]} ]]; then # si el archivo es css entonces reemplazara el texto version
+				IDCOMMIT=$(set -f; git log -1 --format=%h)
+				sed -i "s/version/v=$IDCOMMIT/g" $FILE
+				echo -e ""
+				echo "reemplazando version dentro del css"
+				echo -e ""
+			fi
+			#echo "extension estatica detectada - - - > ${I}"
+			RESULT="true"
+		fi
+	done
+done
+
+if [ "$RESULT" == "true" ] ; then
+	IDCOMMIT=$(set -f; git log -1 --format=%h)
+	git log -1 --format=%h > last_commit
+	git add .
+	git commit -m "update $COMMITFILE to: $IDCOMMIT" --no-verify
+	echo -e ""
+	echo -e "update $COMMITFILE to: $IDCOMMIT"
+	echo -e ""
+	exit 0
+fi
