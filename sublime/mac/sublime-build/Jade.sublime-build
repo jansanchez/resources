@@ -1,0 +1,9 @@
+{
+  "cmd": ["jade", "--pretty","$file"],
+  "file_regex": ".",
+  "selector": "source.jade",
+  "osx":
+  {
+    "path": "/usr/local/bin:$PATH"
+  }
+}
