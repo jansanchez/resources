@@ -2,8 +2,8 @@
 	"selector": "source.jade",
 	"cmd": ["jade", "-P", "<$file>", "${file_path}/${file_base_name}.html"],
 	"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
-	"windows":  
-	{  
-		"shell":["cmd"]
+	"windows":
+	{
+	"shell":["cmd"]
 	}
 }
