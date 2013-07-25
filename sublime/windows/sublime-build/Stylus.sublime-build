@@ -1,5 +1,5 @@
 {
-  "cmd": ["stylus", "$file"],
+  "cmd": ["stylus", "-w", "$file"],
   "file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
   "selector": "source.stylus",
   "windows":
