@@ -33,3 +33,4 @@ alias   gmr='git merge releases'
 alias   gmm='git merge master'
 alias  gff="git fetch -p && git rebase origin/\$(just_git_branch)"
 alias  gls='git log --pretty=format:"%C(reset)%h %C(yellow)%ad%C(yellow)%d %C(reset)%s%C(green) [%cn]" --decorate --date=short'
+
