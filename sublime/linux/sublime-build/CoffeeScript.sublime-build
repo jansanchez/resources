@@ -4,16 +4,3 @@
 	"selector" : "source.coffee",
 	"path" : "/usr/local/bin"
 }
-/*{
-	"cmd": ["cake", "sbuild"]
-,	"path": "/usr/local/bin:/home/jan/"
-,	"selector": "source.coffee"
-,	"variants":
-	[
-		{
-			"name": "Run",
-			"cmd": ["coffee", "$file"]
-		}
-	]
-}
-*/
