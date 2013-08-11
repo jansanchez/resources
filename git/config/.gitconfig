@@ -3,7 +3,9 @@
 
 [user]
 	name = Jan Sanchez
-	email = jan.sanchez@perucomsultores.pe
+	email = joejansanchez@gmail.com
+[credential]
+	helper = cache --timeout=3600
 [alias]
 	st = status 
 	pu = pull 
