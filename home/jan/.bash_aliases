@@ -52,16 +52,16 @@ alias ~="cd ~" # `cd` is probably faster to type though
 alias -- -="cd -"
 
 # programs
-alias st='sublime'
-alias firefox="firefox"
-alias chrome="google-chrome"
-alias f='thunar ./'
+alias st='sublime &'
+alias firefox="firefox &"
+alias chrome="google-chrome &"
+alias f='thunar ./ &'
 
 
 # general shortcuts
 alias pro="cd ~/htdocs/"
-alias gh="google-chrome 'http://github.com/jansanchez'"
-alias bl="google-chrome 'http://browserling.com'"
+alias gh="google-chrome 'http://github.com/jansanchez'" &
+alias bl="google-chrome 'http://browserling.com'" &
 
 # be nice
 alias please=sudo
@@ -171,3 +171,8 @@ done
 alias stfu="osascript -e 'set volume output muted true'"
 alias pumpitup="osascript -e 'set volume 10'"
 alias hax="growlnotify -a 'Activity Monitor' 'System error' -m 'WTF R U DOIN'"
+
+
+#alias chaplin='cd frontend/chaplin/ && make && cd ../..'
+
+alias chaplin='coffee --watch --bare --output src/public/static/js/um/ frontend/chaplin/coffee/'
