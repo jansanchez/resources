@@ -1,13 +1,15 @@
+#!/bin/bash
+
 # ~/.bash_aliases
 # 
 
 #aliases for git
 
-alias  gam='git commit -am'
+alias  gam='git commit -am '
 alias  grm='git rm'
 alias  gmv='git mv'
 alias  grr='git reset --hard HEAD'
-alias goop="git commit --amend -C HEAD -n"
+alias goop='git commit --amend -C HEAD -n'
 alias   ga='git add'
 alias   gp='git pull'
 alias  gpu='git push'
@@ -19,7 +21,7 @@ alias   gb='git branch'
 alias   gbr='git branch -r'
 alias   gcb='git checkout -b'
 alias   gc='git checkout'
-alias   gac='git add .; git commit -am'
+alias   gac='git add .; git commit -am '
 alias   gpo='git pull origin '
 alias   gpuo='git push origin '
 alias   gpom='git pull origin master'
@@ -37,10 +39,10 @@ alias   gmh='git merge hotfix'
 alias   gmd='git merge development'
 alias   gmr='git merge releases'
 alias   gmm='git merge master'
-alias   gff="git fetch -p && git rebase origin/\$(just_git_branch)"
+alias   gff='git fetch -p && git rebase origin/\$(just_git_branch)'
 alias   gls='git log --pretty=format:"%C(reset)%h %C(yellow)%ad%C(yellow)%d %C(reset)%s%C(green) [%cn]" --decorate --date=short'
 alias   gclone='git clone '
-
+alias   gcount='git shortlog -s -n --all'
 
 
 # Easier navigation: .., ..., ~ and -
@@ -175,4 +177,14 @@ alias hax="growlnotify -a 'Activity Monitor' 'System error' -m 'WTF R U DOIN'"
 
 #alias chaplin='cd frontend/chaplin/ && make && cd ../..'
 
+alias home='cd ~/'
+
 alias chaplin='coffee --watch --bare --output src/public/static/js/um/ frontend/chaplin/coffee/'
+
+alias css='cd ~/htdocs/urbania3/frontend/css && node init.njs && cd ~/htdocs/urbania3/'
+
+alias cafe='coffee --watch --bare --output src/public/static/js/ frontend/cafe/'
+
+alias urbania='cd ~/htdocs/urbania3/ && gf && gpom && git gc'
+
+alias doc='cd ~/htdocs/urbania3/src/public/static/js && yuidoc . && urbania'

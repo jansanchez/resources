@@ -1,0 +1,22 @@
+
+
+set background=dark
+syntax on
+color mango
+
+:au FocusLost * :set number
+:au FocusGained * :set relativenumber
+ 
+autocmd InsertEnter * :set number
+autocmd InsertLeave * :set relativenumber
+ 
+autocmd VimEnter * NERDTree
+autocmd VimEnter * wincmd p
+ 
+:let NERDTreeShowHidden = 1
+ 
+:let NERDTreeWinPos = "left"
+ 
+:let NERDTreeWinSize = 35
+ 
+:let NERDTreeQuitOnOpen = 0
