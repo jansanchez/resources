@@ -5,27 +5,27 @@
 
 #aliases for git
 
-alias  gam='git commit -am '
+alias  gam='echo " > git commit -am" && git commit -am '
 alias  grm='git rm'
 alias  gmv='git mv'
 alias  grr='git reset --hard HEAD'
 alias goop='git commit --amend -C HEAD -n'
 alias   ga='git add'
 alias   gp='git pull'
-alias  gpu='git push'
+alias  gpu='echo " > git push " && git push'
 alias   gl='git log --name-status'
 alias   gs='git status'
-alias   gf='git fetch -p'
+alias   gf='echo " > git fetch -p" &&  git fetch -p'
 alias   gm='git commit -m'
-alias   gb='git branch'
-alias   gbr='git branch -r'
-alias   gcb='git checkout -b'
+alias   gb='echo " > git branch" && git branch'
+alias   gbr='echo " > git branch -r" && git branch -r'
+alias   gcb='echo "git checkout -b" && git checkout -b'
 alias   gc='git checkout'
-alias   gac='git add .; git commit -am '
-alias   gpo='git pull origin '
-alias   gpuo='git push origin '
-alias   gpom='git pull origin master'
-alias   gpuom='git push origin master'
+alias   gac='echo " > git add .; git commit -am " && git add .; git commit -am '
+alias   gpo='echo " > " && git pull origin '
+alias   gpuo='echo " > git push origin " && git push origin '
+alias   gpom='echo " > git pull origin master" && git pull origin master'
+alias   gpuom='echo " > git push origin master" && git push origin master'
 alias   gpod='git pull origin development'
 alias   gpuod='git push origin development'
 alias   gpor='git pull origin releases'
@@ -41,8 +41,8 @@ alias   gmr='git merge releases'
 alias   gmm='git merge master'
 alias   gff='git fetch -p && git rebase origin/\$(just_git_branch)'
 alias   gls='git log --pretty=format:"%C(reset)%h %C(yellow)%ad%C(yellow)%d %C(reset)%s%C(green) [%cn]" --decorate --date=short'
-alias   gclone='git clone '
-alias   gcount='git shortlog -s -n --all'
+alias   gclone='echo " > git clone " && git clone '
+alias   gcount='echo " > git shortlog -s -n --all" && git shortlog -s -n --all'
 
 
 # Easier navigation: .., ..., ~ and -
@@ -62,8 +62,6 @@ alias f='thunar ./ &'
 
 # general shortcuts
 alias pro="cd ~/htdocs/"
-alias gh="google-chrome 'http://github.com/jansanchez'" &
-alias bl="google-chrome 'http://browserling.com'" &
 
 # be nice
 alias please=sudo
@@ -129,11 +127,7 @@ alias npmrg="sudo npm uninstall -g"
 alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
 alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
 
-# Canonical hex dump; some systems have this symlinked
-type -t hd > /dev/null || alias hd="hexdump -C"
 
-# OS X has no `md5sum`, so use `md5` as a fallback
-type -t md5sum > /dev/null || alias md5sum="md5"
 
 # Trim new lines and copy to clipboard
 alias c="tr -d '\n' | pbcopy"
@@ -185,6 +179,8 @@ alias css='cd ~/htdocs/urbania3/frontend/css && node init.njs && cd ~/htdocs/urb
 
 alias cafe='coffee --watch --bare --output src/public/static/js/ frontend/cafe/'
 
-alias urbania='cd ~/htdocs/urbania3/ && gf && gpom && git gc'
+alias urbania='cd ~/htdocs/urbania3/ && gpom'
 
 alias doc='cd ~/htdocs/urbania3/src/public/static/js && yuidoc . && urbania'
+
+
