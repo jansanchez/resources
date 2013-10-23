@@ -14,7 +14,7 @@ alias   ga='git add'
 alias   gp='git pull'
 alias  gpu='echo " > git push " && git push'
 alias   gl='git log --name-status'
-alias   gs='git status'
+alias   gs='echo " > git status" && git status'
 alias   gf='echo " > git fetch -p" &&  git fetch -p'
 alias   gm='git commit -m'
 alias   gb='echo " > git branch" && git branch'
@@ -43,6 +43,15 @@ alias   gff='git fetch -p && git rebase origin/\$(just_git_branch)'
 alias   gls='git log --pretty=format:"%C(reset)%h %C(yellow)%ad%C(yellow)%d %C(reset)%s%C(green) [%cn]" --decorate --date=short'
 alias   gclone='echo " > git clone " && git clone '
 alias   gcount='echo " > git shortlog -s -n --all" && git shortlog -s -n --all'
+alias   gla='echo " > git log --author" && git log --author '
+
+alias   gusers="git log --format='%aN' | sort -u"
+
+function glas() {
+	git log --name-only --pretty=format: --author="$1" --since=$2 | sort | uniq
+}
+
+
 
 
 # Easier navigation: .., ..., ~ and -
@@ -183,4 +192,4 @@ alias urbania='cd ~/htdocs/urbania3/ && gpom'
 
 alias doc='cd ~/htdocs/urbania3/src/public/static/js && yuidoc . && urbania'
 
-
+alias jadeflux='jade --pretty --watch' 
