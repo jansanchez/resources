@@ -1,0 +1,102 @@
+#!/usr/bin/env node
+
+/*
+ * versionador de estaticos + compressor
+ * Author: @jansanchez
+ * version: 0.2
+ */
+
+var fs = require("fs"),
+	exec = require("child_process").exec,
+	extensions = ["js", "css", "png", "jpg", "gif"],
+	hasStatic = false,
+	gruntTask = "grunt produccion",
+	commitFile = "src/last_commit",
+	gruntPath = '/home/jan/htdocs/urbania3/frontend/grunt';
+
+console.log(' + Ejecutando Hook...');
+
+function execute(command, callback) {
+	exec(command, function (error, stdout, stderr) {
+		callback(stdout);
+	});
+};
+
+function getRegEx(ext) {
+	var preRegex = '',
+		dot = /\./,
+		dollarSign = /$/,
+		finalpreRegex = null;
+
+	for (i = 0; i < ext.length; i++) {
+		preRegex += ext[i] + "|"
+	}
+	preRegex = preRegex.substr(0, preRegex.length - 1);
+	preRegex = "(" + preRegex + ")";
+	regex = new RegExp(dot.source + preRegex + dollarSign.source);
+	//console.log(regex);
+	return regex;
+}
+
+
+module.exports.getLastCommit = function (callback) {
+	var commit = {};
+	execute("git rev-list --max-count=1 HEAD", function (last) {
+		commit.last = last.replace("\n", "");
+		execute("git rev-list --max-count=1 HEAD~1", function (penultimate) {
+			commit.penultimate = penultimate.replace("\n", "");
+			var diff = "git diff " + commit.last + " " + commit.penultimate + " --name-only";
+			execute(diff, function (files) {
+				files = files.replace(/\n/gi, ',');
+				files = files.substr(0, files.length - 1);
+				commit.files = files.split(',');
+				callback(commit);
+			});
+		});
+	});
+};
+
+module.exports.getLastCommit(function (obj) {
+	//console.log(obj.files);
+	for (var i = 0; i < obj.files.length; i++) {
+		if (getRegEx(extensions).test(obj.files[i])) {
+			hasStatic = true;
+			break;
+		}
+	};
+	if (hasStatic) {
+		console.log("   - extensiones estaticas detectadas.");
+		console.log('   - inicio de minificacion de estaticos.');
+
+		exec(gruntTask, {
+			cwd: gruntPath
+		}, function (err, stdout, stderr) {
+			console.log(stdout);
+			var exitCode = 0;
+
+			if (err) {
+				console.log(stderr);
+				exitCode = -1;
+				process.exit(exitCode);
+			}
+
+			console.log('   - fin de minificacion de estaticos.');
+			execute("git log -1 --format=%h", function (idCommit) {
+				idCommit = idCommit.replace(/\n/gi, '');
+				//console.log(idCommit);
+				fs.writeFile(commitFile, idCommit, function (err) {
+					if (err) {
+						console.log(err);
+						process.exit(exitCode);
+					}
+					var msg = 'update "' + commitFile + '" to ' + idCommit;
+					execute("git add .; git commit -m \"" + msg + "\" ", function () {
+						console.log("   - " + msg);
+						process.exit(exitCode);
+					});
+				});
+			});
+
+		});
+	};
+});
