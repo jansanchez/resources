@@ -1,0 +1,104 @@
+#!/usr/bin/env bash
+#
+# issues Bash Function
+# 
+# autor: Jan Sanchez
+#
+
+# Si desea cambiar la rama principal, 
+# simplemente cambie el nombre de la rama dentro de la variable 'MAIN_BRANCH'
+
+MAIN_BRANCH="before#releases";
+
+CONTINUE=true;
+
+function issues() {
+	if [[ ! "$1" == "" ]]; then
+		case "$1" in
+			"-h")
+				echo " ";
+				echo " NAME";
+				echo "         issues";
+				echo " SYNOPSIS";
+				echo "         issues [number] [-m] [-h] [-r]";
+				echo " DESCRIPTION";
+				echo "         issues es una función para crear, eliminar y realizar 'git merge' entre la rama '$MAIN_BRANCH'"
+				echo "         y las nuevas ramas creadas con esta función."
+				echo " OPTIONS";
+				echo "         [number]";
+				echo "             Crea una nueva rama local y remota tomando como referencia la rama '$MAIN_BRANCH'";
+				echo "             y luego accede a la nueva rama creada";
+				echo "             Ejemplo de uso:";
+				echo "                 issues 5000";
+				echo "             Con esto se creará la nueva rama local y remota 'issues#5000',";
+				echo "             donde el número '5000' será el número de ticket o tarea relacionada.";
+				echo "";
+				echo "         -m";
+				echo "             Realiza el merge de la rama indicada con la rama '$MAIN_BRANCH',";
+				echo "             luego realiza un push hacia la rama remota '$MAIN_BRANCH'.";
+				echo "             Ejemplo de uso:";
+				echo "                 issues 5000 -m";
+				echo "";
+				echo "         -r";
+				echo "             Elimina la rama local y remota indicada como primer parámetro";
+				echo "             y luego accede a la rama '$MAIN_BRANCH'";
+				echo "             Ejemplo de uso:";
+				echo "                 issues 5000 -d";
+				echo "";
+				echo "         -h";
+				echo "             Muestra la información de ayuda de la función 'issues'";
+				echo "";
+				CONTINUE=false;
+			;;
+			"-m")
+				echo " > Favor ingresar como primer parámetro el 'numero de ticket' ó 'numero de rama'";
+				CONTINUE=false;
+			;;
+			"-r" | "remove")
+				echo " > Favor ingresar como primer parámetro el 'numero de ticket' ó 'numero de rama'";
+				CONTINUE=false;
+			;;
+		esac;
+		if [[ "$CONTINUE" == true ]]; then
+			case "$2" in
+				"")
+					echo " > cambiando de rama y apuntando a la rama $MAIN_BRANCH"
+					git checkout "$MAIN_BRANCH" -f
+					echo " > Actualizando branch $MAIN_BRANCH"
+					git pull origin "$MAIN_BRANCH"
+
+					git checkout -b issues#$1
+					git push origin issues#$1
+
+					echo -e "\e[0m > Se creó la rama remota \e[1missues#$1\e[0m \e[21mhija de\e[0m \e[2m$MAIN_BRANCH\e[0m"
+				;;
+				"-m")
+					echo " > cambiando de rama y apuntando a la rama $MAIN_BRANCH"
+					git checkout "$MAIN_BRANCH" -f
+					echo " > Actualizando branch $MAIN_BRANCH"
+					git pull origin "$MAIN_BRANCH"
+
+					echo "Merge de la rama: 'issues#$1' sobre la rama '$MAIN_BRANCH'";
+					git merge "issues#$1";
+					echo "Subiendo los cambios a la rama remota '$MAIN_BRANCH'";
+					git push origin "$MAIN_BRANCH";
+				;;
+				"-r" | "remove")
+					echo " > cambiando de rama y apuntando a la rama $MAIN_BRANCH"
+					git checkout "$MAIN_BRANCH";
+					echo "\e[0m > Removiendo rama local \e[2m\e[4missues#$1\e[0m"
+					git branch -D issues#$1
+					echo "\e[0m > Removiendo rama remota \e[2m\e[4missues#$1\e[0m"
+					git push origin :issues#$1
+				;;
+				*)
+					echo "El valor ingresado no tiene acciones asociadas.";
+				;;
+			esac;
+		fi
+	else
+		echo "Es necesario enviar parametros para realizar alguna acción.";
+	fi
+
+
+}
