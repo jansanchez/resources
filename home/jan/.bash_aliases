@@ -184,12 +184,6 @@ alias home='cd ~/'
 
 alias chaplin='coffee --watch --bare --output src/public/static/js/um/ frontend/chaplin/coffee/'
 
-alias css='cd ~/htdocs/urbania3/frontend/css && node init.njs && cd ~/htdocs/urbania3/'
-
 alias cafe='coffee --watch --bare --output src/public/static/js/ frontend/cafe/'
-
-alias urbania='cd ~/htdocs/urbania3/ && gpom'
-
-alias doc='cd ~/htdocs/urbania3/src/public/static/js && yuidoc . && urbania'
 
 alias jadeflux='jade --pretty --watch' 
